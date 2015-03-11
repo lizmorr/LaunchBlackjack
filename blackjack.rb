@@ -68,6 +68,8 @@ def computer_game(deck)
 end
 
 def game(deck)
+  puts "Welcome to Blackjack!"
+  puts
   player_result = player_game(deck)
   if player_result < 21
     computer_result = computer_game(deck)
