@@ -9,9 +9,9 @@ class Card
   end
 
   def card_type
-    if value == "A"
+    if @value == "A"
       "ace"
-    elsif ["J","Q","K"].include?(value)
+    elsif ["J","Q","K"].include?(@value)
       "face card"
     else
       "number"

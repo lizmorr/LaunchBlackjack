@@ -11,19 +11,29 @@ class Hand
     @cards_in_hand << card
   end
 
+  def how_many_aces?
+    ace_count = 0
+    @cards_in_hand.each do |card|
+      ace_count += 1 if card.card_type == "ace"
+    end
+    ace_count
+  end
+
   def score
     score = 0
     @cards_in_hand.each do |card|
       score += card.value.to_i if card.card_type == "number"
       score += 10 if card.card_type == "face card"
-      if card.card_type == "ace"
-        if score <= 10
-          score += 11
-        else
-          score += 1
-        end
+      score += 11 if card.card_type == "ace"
+    end
+
+    if score > 21 && how_many_aces? > 0
+      how_many_aces?.times do
+        score -= 10
+        break if score < 21
       end
     end
+
     score
   end
 

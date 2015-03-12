@@ -36,6 +36,7 @@ def player_game(deck)
       puts show_score("Player",player_hand)
     end
   end
+
   if player_hand.score > 21
     puts
     puts "Bust!!! You lose...."
@@ -50,19 +51,20 @@ end
 def computer_game(deck)
   computer_hand = Hand.deal(deck)
   computer_hand.cards_in_hand.each do |card|
-    puts show_dealt("Computer",card)
+    puts show_dealt("Dealer",card)
   end
-  puts show_score("Computer",computer_hand)
+  puts show_score("Dealer",computer_hand)
   puts
   while computer_hand.score < 17
     card = deck.draw!
     computer_hand.add(card)
-    puts show_dealt("Computer",card)
-    puts show_score("Computer",computer_hand)
+    puts show_dealt("Dealer",card)
+    puts show_score("Dealer",computer_hand)
     puts
   end
+
   if computer_hand.score > 21
-    puts "Computer bust!"
+    puts "Dealer bust!"
   end
   computer_hand.score
 end
@@ -75,6 +77,8 @@ def game(deck)
     computer_result = computer_game(deck)
     if computer_result > 21 || computer_result < player_result
       puts "You win!"
+    elsif computer_result == player_result
+      puts "Tie, play again!"
     else
       puts "Computer wins! =("
     end
